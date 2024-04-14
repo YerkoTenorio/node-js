@@ -1,0 +1,447 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: clientes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.clientes (
+    id integer NOT NULL,
+    nombre character varying(100),
+    correo_electronico character varying(100),
+    direccion character varying(255)
+);
+
+
+ALTER TABLE public.clientes OWNER TO postgres;
+
+--
+-- Name: clientes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.clientes_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.clientes_id_seq OWNER TO postgres;
+
+--
+-- Name: clientes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.clientes_id_seq OWNED BY public.clientes.id;
+
+
+--
+-- Name: empleados; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.empleados (
+    id integer NOT NULL,
+    nombre character varying(100),
+    correo_electronico character varying(100),
+    direccion character varying(255),
+    puesto character varying(100)
+);
+
+
+ALTER TABLE public.empleados OWNER TO postgres;
+
+--
+-- Name: empleados_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.empleados_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.empleados_id_seq OWNER TO postgres;
+
+--
+-- Name: empleados_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.empleados_id_seq OWNED BY public.empleados.id;
+
+
+--
+-- Name: productos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.productos (
+    id integer NOT NULL,
+    nombre character varying(100),
+    descripcion text,
+    precio numeric(10,2)
+);
+
+
+ALTER TABLE public.productos OWNER TO postgres;
+
+--
+-- Name: productos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.productos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.productos_id_seq OWNER TO postgres;
+
+--
+-- Name: productos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.productos_id_seq OWNED BY public.productos.id;
+
+
+--
+-- Name: ventas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ventas (
+    id integer NOT NULL,
+    id_cliente integer,
+    id_empleado integer,
+    fecha date
+);
+
+
+ALTER TABLE public.ventas OWNER TO postgres;
+
+--
+-- Name: ventas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ventas_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ventas_id_seq OWNER TO postgres;
+
+--
+-- Name: ventas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ventas_id_seq OWNED BY public.ventas.id;
+
+
+--
+-- Name: ventas_productos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ventas_productos (
+    id_venta integer,
+    id_producto integer,
+    cantidad integer
+);
+
+
+ALTER TABLE public.ventas_productos OWNER TO postgres;
+
+--
+-- Name: clientes id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.clientes ALTER COLUMN id SET DEFAULT nextval('public.clientes_id_seq'::regclass);
+
+
+--
+-- Name: empleados id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleados ALTER COLUMN id SET DEFAULT nextval('public.empleados_id_seq'::regclass);
+
+
+--
+-- Name: productos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.productos ALTER COLUMN id SET DEFAULT nextval('public.productos_id_seq'::regclass);
+
+
+--
+-- Name: ventas id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas ALTER COLUMN id SET DEFAULT nextval('public.ventas_id_seq'::regclass);
+
+
+--
+-- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.clientes (id, nombre, correo_electronico, direccion) FROM stdin;
+1	Juan Perez	juan.perez@example.com	Calle 123, Ciudad, País
+2	Maria Lopez	maria.lopez@example.com	Avenida 456, Ciudad, País
+3	Carlos Gomez	carlos.gomez@example.com	Calle 789, Ciudad, País
+4	Ana Martinez	ana.martinez@example.com	Avenida 012, Ciudad, País
+5	Pedro Rodriguez	pedro.rodriguez@example.com	Calle 345, Ciudad, País
+6	Laura Garcia	laura.garcia@example.com	Avenida 678, Ciudad, País
+7	Jose Hernandez	jose.hernandez@example.com	Calle 901, Ciudad, País
+8	Sofia Torres	sofia.torres@example.com	Avenida 234, Ciudad, País
+9	Luis Ramirez	luis.ramirez@example.com	Calle 567, Ciudad, País
+10	Isabel Castro	isabel.castro@example.com	Avenida 890, Ciudad, País
+11	Fernando Silva	fernando.silva@example.com	Calle 111, Ciudad, País
+12	Rosa Espinoza	rosa.espinoza@example.com	Avenida 222, Ciudad, País
+13	Miguel Cordero	miguel.cordero@example.com	Calle 333, Ciudad, País
+14	Cecilia Navarro	cecilia.navarro@example.com	Avenida 444, Ciudad, País
+15	Ernesto Vargas	ernesto.vargas@example.com	Calle 555, Ciudad, País
+16	Gabriela Paredes	gabriela.paredes@example.com	Avenida 666, Ciudad, País
+17	Alfredo Zavala	alfredo.zavala@example.com	Calle 777, Ciudad, País
+18	Liliana Ochoa	liliana.ochoa@example.com	Avenida 888, Ciudad, País
+19	Sergio Mena	sergio.mena@example.com	Calle 999, Ciudad, País
+20	Ruth Cazares	ruth.cazares@example.com	Avenida 000, Ciudad, País
+\.
+
+
+--
+-- Data for Name: empleados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.empleados (id, nombre, correo_electronico, direccion, puesto) FROM stdin;
+1	Ricardo Morales	ricardo.morales@example.com	Calle 123, Ciudad, País	Vendedor
+2	Patricia Guzman	patricia.guzman@example.com	Avenida 456, Ciudad, País	Gerente
+3	Francisco Reyes	francisco.reyes@example.com	Calle 789, Ciudad, País	Vendedor
+4	Carmen Aguilar	carmen.aguilar@example.com	Avenida 012, Ciudad, País	Gerente
+5	Rafael Peña	rafael.peña@example.com	Calle 345, Ciudad, País	Vendedor
+6	Teresa Rios	teresa.rios@example.com	Avenida 678, Ciudad, País	Gerente
+7	Roberto Padilla	roberto.padilla@example.com	Calle 901, Ciudad, País	Vendedor
+8	Sandra Mendoza	sandra.mendoza@example.com	Avenida 234, Ciudad, País	Gerente
+9	Javier Guerra	javier.guerra@example.com	Calle 567, Ciudad, País	Vendedor
+10	Beatriz Delgado	beatriz.delgado@example.com	Avenida 890, Ciudad, País	Gerente
+11	Guillermo Loya	guillermo.loya@example.com	Calle 111, Ciudad, País	Vendedor
+12	Susana Ortega	susana.ortega@example.com	Avenida 222, Ciudad, País	Gerente
+13	Hugo Ponce	hugo.ponce@example.com	Calle 333, Ciudad, País	Vendedor
+14	Norma Rangel	norma.rangel@example.com	Avenida 444, Ciudad, País	Gerente
+15	Eduardo Quintero	eduardo.quintero@example.com	Calle 555, Ciudad, País	Vendedor
+16	Patricia Uribe	patricia.uribe@example.com	Avenida 666, Ciudad, País	Gerente
+17	Jorge Vera	jorge.vera@example.com	Calle 777, Ciudad, País	Vendedor
+18	Sonia Nava	sonia.nava@example.com	Avenida 888, Ciudad, País	Gerente
+19	Ricardo Parra	ricardo.parra@example.com	Calle 999, Ciudad, País	Vendedor
+20	Lourdes Solano	lourdes.solano@example.com	Avenida 000, Ciudad, País	Gerente
+\.
+
+
+--
+-- Data for Name: productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.productos (id, nombre, descripcion, precio) FROM stdin;
+1	Laptop	Laptop con procesador i7, 16GB RAM, 512GB SSD	1500.00
+2	Smartphone	Smartphone con pantalla de 6.5 pulgadas, 128GB de almacenamiento	800.00
+3	Tablet	Tablet de 10 pulgadas, 64GB de almacenamiento	300.00
+4	Monitor	Monitor de 27 pulgadas, resolución 4K	600.00
+5	Teclado	Teclado mecánico con retroiluminación RGB	100.00
+6	Mouse	Mouse con sensor óptico de alta precisión	50.00
+7	Impresora	Impresora láser monocromática	200.00
+8	Silla de oficina	Silla de oficina ergonómica con soporte lumbar	250.00
+9	Escritorio	Escritorio de madera con altura ajustable	400.00
+10	Audífonos	Audífonos inalámbricos con cancelación de ruido	300.00
+\.
+
+
+--
+-- Data for Name: ventas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ventas (id, id_cliente, id_empleado, fecha) FROM stdin;
+1	1	1	2022-01-01
+2	2	2	2022-01-02
+3	3	1	2022-01-03
+4	4	2	2022-01-04
+5	5	1	2022-01-05
+6	6	2	2022-01-06
+7	7	1	2022-01-07
+8	8	2	2022-01-08
+9	9	1	2022-01-09
+10	10	2	2022-01-10
+11	11	11	2022-02-01
+12	12	12	2022-02-02
+13	13	11	2022-02-03
+14	14	12	2022-02-04
+15	15	11	2022-02-05
+16	16	12	2022-02-06
+17	17	11	2022-02-07
+18	18	12	2022-02-08
+19	19	11	2022-02-09
+20	20	12	2022-02-10
+21	9	12	2022-02-10
+\.
+
+
+--
+-- Data for Name: ventas_productos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ventas_productos (id_venta, id_producto, cantidad) FROM stdin;
+1	1	1
+3	3	1
+4	4	1
+5	5	1
+6	6	1
+7	7	1
+8	8	1
+9	9	1
+10	10	1
+1	2	1
+11	2	1
+12	3	2
+13	4	1
+14	5	3
+15	6	2
+16	7	1
+17	8	2
+18	9	1
+19	10	3
+20	1	2
+8	1	1
+9	2	1
+4	3	1
+9	4	1
+4	5	1
+4	6	1
+2	7	1
+10	8	1
+3	9	1
+2	10	1
+21	3	1
+9	3	1
+\.
+
+
+--
+-- Name: clientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.clientes_id_seq', 20, true);
+
+
+--
+-- Name: empleados_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.empleados_id_seq', 20, true);
+
+
+--
+-- Name: productos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.productos_id_seq', 10, true);
+
+
+--
+-- Name: ventas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ventas_id_seq', 20, true);
+
+
+--
+-- Name: clientes clientes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.clientes
+    ADD CONSTRAINT clientes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: empleados empleados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleados
+    ADD CONSTRAINT empleados_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: productos productos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.productos
+    ADD CONSTRAINT productos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ventas ventas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas
+    ADD CONSTRAINT ventas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ventas ventas_id_cliente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas
+    ADD CONSTRAINT ventas_id_cliente_fkey FOREIGN KEY (id_cliente) REFERENCES public.clientes(id);
+
+
+--
+-- Name: ventas ventas_id_empleado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas
+    ADD CONSTRAINT ventas_id_empleado_fkey FOREIGN KEY (id_empleado) REFERENCES public.empleados(id);
+
+
+--
+-- Name: ventas_productos ventas_productos_id_producto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas_productos
+    ADD CONSTRAINT ventas_productos_id_producto_fkey FOREIGN KEY (id_producto) REFERENCES public.productos(id);
+
+
+--
+-- Name: ventas_productos ventas_productos_id_venta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ventas_productos
+    ADD CONSTRAINT ventas_productos_id_venta_fkey FOREIGN KEY (id_venta) REFERENCES public.ventas(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
