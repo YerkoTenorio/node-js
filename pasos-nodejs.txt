@@ -1,0 +1,42 @@
+1- npm init -y // comando para crear el package.json
+
+2- npm i typescript -D // comando para instalar typescript como dependencia de desarrollo
+
+3- npx tsc --init // comando para crear el archivo de configuración de typescript
+
+    en el archivo tsconfig.json se configura el compilador de typescript 
+    
+    hay que descomentar la linea  "outDir": "./dist", para que se cree la carpeta dist y se guarde el archivo js compilado
+
+    tambien hay que descomentar la linea "rootDir": "./src", para que se compile el archivo ts que se encuentre en la carpeta src
+
+    descomentar la linea "moduleResolution": "node", para que se resuelvan los modulos de node y poder usar variables de entorno globales
+
+    descomentar "esModuleInterop": true, para que se puedan importar modulos de node con la sintaxis de import de es6
+
+    anadir "exclude": ["node_modules"], para que no compile los modulos de node
+
+4- npx tsc // comando para compilar el archivo ts y crear el archivo js
+
+5- npm i express pg // comando para instalar express y pg como dependencias de produccion express es un framework de node para crear servidores y pg es un driver para conectarse a postgres
+
+6- npm i @types/express -D // comando para instalar los tipos de express como dependencia de desarrollo
+
+7- npm i @types/pg -D // comando para instalar los tipos de pg como dependencia de desarrollo
+
+8- npm i concurrently -D // comando para instalar concurrently como dependencia de desarrollo
+
+9- en package.json en la seccion de scripts se puede anadir el script "dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\""
+
+    este script ejecuta dos comandos al mismo tiempo el primero es para compilar el archivo ts y el segundo es para ejecutar el archivo js
+
+    para que funcione hay que instalar nodemon como dependencia de desarrollo con el comando npm i nodemon -D
+
+10- creamos el archivo database.ts en la carpeta src para conectarnos a la base de datos
+
+11- creamos el archivo index.ts en la carpeta src para crear el servidor
+
+12- creamos la carpeta routes en la carpeta src y creamos el archivo index.ts para crear las rutas
+
+13- creamos la carpeta controllers en la carpeta src y creamos el archivo index.ts para crear los controladores donde se ejecutan las funciones de las rutas
+
